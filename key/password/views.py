@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 # Create your views here.
+
 def index(request):
     return HttpResponse("Index page")
 
@@ -11,5 +12,5 @@ def login(request):
 def profile(request):
     return HttpResponse("User profile page")
 
-def about(response):
+def about(request):
     return HttpResponse("About page")
