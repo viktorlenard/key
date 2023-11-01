@@ -58,8 +58,8 @@ Checks for a validated request first.
 'human' passwords should be easily readable and use words from the database.
 'div' is the divider between words, chosen by the user.
 'length' is the amount of words the password is made up of. 3-8
-'caps' should titlecase each word, capitalise the last word.
-'nums' should add a random int at the end with a lenght of two.
+'caps' capitalise a random word.
+'nums' should add a random 2 digit int at the end of a random word.
 
 Non 'human' passowords are made up of words generated of ascii letters, numbers and 
 some special chars (divs can't show in the words themselves). 
@@ -71,21 +71,18 @@ def password_generator(pr):
         raise ValueError('Invalid request. Cannot generate.')
     words = []
     if pr['human'] is True:
-        if pr['caps'] is True:
-            for _ in range(pr['length'] - 1):
-                words.append(random.choice(list(data.keys())).title())
-                words.append(pr['div'])
-            words.append(random.choice(list(data.keys())).upper())
-        elif pr['caps'] is False:
-            for _ in range(pr['length'] - 1):
-                words.append(random.choice(list(data.keys())))
-                words.append(pr['div'])
-            words.append(random.choice(list(data.keys())))
-        password = ''.join([str(item) for item in words])
+        for _ in range(pr['length'] - 1):
+            words.append(random.choice(list(data.keys())).title())
+            words.append(pr['div'])
+        words.append(random.choice(list(data.keys())).title())
         if pr['nums'] is True:
+            index = int(random.randrange(0, (pr['length']*2)-1, 2))
             numbers = ''.join(random.choice(string.digits)for i in range(2))
-            password = password + numbers
-
+            words[index] = words[index] + numbers
+        if pr['caps'] is True:
+            index = int(random.randrange(0, (pr['length']*2)-1, 2))
+            words[index] = words[index].upper()
+        password = ''.join([str(item) for item in words])
     else:
         for _ in range(pr['length'] - 1):
             word = ''.join(random.choice(string.ascii_letters + string.digits + '!#$%&*') for i in range(random.randint(5, 8)))
