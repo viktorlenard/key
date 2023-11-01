@@ -2,18 +2,35 @@ import random
 import json
 import string
 
+''' 
+Database containing a dict, with strings as the keys,
+and their lenght as the value. English words only. Currently
+limited to lenghts between 5-7 
+'''
 
 f = open('/Users/viktorlenard/Desktop/Repos/key/words.json')
 data = json.load(f)
 
+'''
+Password request in the form of a dict. Would be coming 
+from the user in the form of inputs on the website.
+'''
+
 password_request = {
-    'human': False,
+    'human': True,
     'length': 3,
-    'div': '_',
+    'div': '-',
     'caps': True,
     'nums': True,
     'valid': None
 }
+
+'''
+Validate the request to avoid HTML shenanigans.
+Thorws an error if any of the value is outside of what
+the generator expects. 
+Changes 'valid' to True and returns the updated request.
+'''
 
 def request_validator(pr):
     if pr['human'] not in [True, False]:
@@ -34,6 +51,20 @@ def request_validator(pr):
     
     pr['valid'] = True
     return pr
+
+'''
+Password generator function. Expects a dict, returns a string.
+Checks for a validated request first. 
+'human' passwords should be easily readable and use words from the database.
+'div' is the divider between words, chosen by the user.
+'length' is the amount of words the password is made up of. 3-8
+'caps' should titlecase each word, capitalise the last word.
+'nums' should add a random int at the end with a lenght of two.
+
+Non 'human' passowords are made up of words generated of ascii letters, numbers and 
+some special chars (divs can't show in the words themselves). 
+Doesn't check for 'nums' or 'caps' as they must include.
+'''
 
 def password_generator(pr):
     if pr['valid'] != True:
