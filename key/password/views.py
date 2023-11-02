@@ -4,10 +4,10 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
-    return HttpResponse("Index page")
+    return render(request, "password/index.html")
 
 def login(request):
-    return HttpResponse("Login page")
+    return render(request, "password/login.html")
 
 def profile(request):
     return HttpResponse("User profile page")
