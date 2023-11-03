@@ -3,8 +3,8 @@ import json
 import string
 
 '''
-All backend helper functions stored here. List of functions here,
-more detailed explanation found with the code below.
+File for all backend functions. List of functions at the top,
+more detailed explanation with the respective code below.
     
     def password_validator(dict) - Validate password request.
     def password_generator(dict) - Generate password based on a validated request. 
@@ -23,7 +23,7 @@ data = json.load(f)
 
 '''
 Password request in the form of a dict. Would be coming 
-from the user in the form of inputs on the website.
+from the user in the form of inputs on the website. For testing.
 
 '''
 
@@ -105,8 +105,6 @@ def password_generator(pr):
 
     return password
 
-
-"""
 def main():
     request_validator(password_request)
     password = password_generator(password_request)
@@ -114,4 +112,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-"""
