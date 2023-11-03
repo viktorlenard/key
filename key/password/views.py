@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from utils import request_validator, password_generator, password_request
+from .utils import request_validator, password_generator, password_request
 
 # Create your views here. Logic goes here.
 
