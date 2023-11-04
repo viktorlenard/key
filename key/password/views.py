@@ -15,8 +15,8 @@ def index(request):
 def login(request):
     return render(request, "password/login.html")
 
-def profile(request):
-    return render(request, "password/profile.html")
+def register(request):
+    return render(request, "password/register.html")
 
 def about(request):
     return render(request, "password/about.html")
