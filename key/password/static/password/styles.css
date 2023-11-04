@@ -1,10 +1,67 @@
+/* Custom fonts */
+
+@font-face {
+    font-family: 'Pangia_Bold';
+    src: url(fonts/PPPangaia-Bold.woff2) format('woff');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'Pangia_Light';
+    src: url(fonts/PPPangaia-Light.woff) format('woff');
+    font-weight: light;
+}
+@font-face {
+    font-family: 'Monument_Reg';
+    src: url(fonts/PPMonumentExtended-Regular.woff) format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Monument_Reg_Italic';
+    src: url(fonts/PPMonumentExtended-RegularItalic.woff) format('woff');
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Monument_Black';
+    src: url(fonts/PPMonumentExtended-Black.woff) format('woff');
+    font-weight: bolder;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Monument_Black_Italic';
+    src: url(fonts/PPMonumentExtended-BlackItalic.woff) format('woff');
+    font-weight: bolder;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Monument_Bold';
+    src: url(fonts/PPMonumentExtended-Bold.woff) format('woff');
+    font-weight: 400;
+    font-style: bold;
+}
+@font-face {
+    font-family: 'Monument_Bold_Italic';
+    src: url(fonts/PPMonumentExtended-BoldItalic.woff) format('woff');
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* --------------------------------------------- */
+
 h1 {
-    font-family: sans-serif;
-    font-size: 36px;
+    font-family: 'Pangia_Bold', serif;
+    font-size: 46px;
     text-align: center;
 }
 
+h3 {
+    font-family: 'Monument_Bold', sans-serif;
+    font-size: 25px;
+}
+
 footer {
+    font-family: 'Monument_Bold_Italic', sans-serif;
     text-align: center;
     padding: 0px;
     background-color: lightslategray;
