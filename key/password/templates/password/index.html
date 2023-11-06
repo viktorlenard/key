@@ -4,6 +4,16 @@
 
 <h1>Passwords</h1>
 <div name="index_div">
+    <form method="POST" action="", id="password_generator">
+        {% csrf_token %}
+        Password
+        {{ password_form.password }}
+        Numbers
+        {{ password_form.numbers }}
+        Caps
+        {{ password_form.caps }}
+        <input name="submit_password" type="submit" value="Add Password" required></submit>
+    </form>
     <h3>Password</h3>
     <p>{{ password }}</p>
 </div>

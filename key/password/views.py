@@ -7,15 +7,19 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import *
-from .forms import CreateUserForm
+from .forms import CreateUserForm, PasswordForm
 
 @login_required(login_url='login') # User must be logged in. If not, redirect them to 'login'.
 def index(request):
     request_validator(password_request)
     password = password_generator(password_request)
+    password_form = PasswordForm()
+    initial_data = {'password': password}
+    password_form = PasswordForm(initial=initial_data)
 
     return render(request, "password/index.html", {
-        "password": password
+        "password": password,
+        "password_form": password_form
     })
 
 def login_page(request):  
