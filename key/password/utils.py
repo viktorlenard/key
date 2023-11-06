@@ -105,6 +105,7 @@ def password_generator(pr):
 
     return password
 
+
 def main():
     request_validator(password_request)
     password = password_generator(password_request)

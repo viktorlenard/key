@@ -7,5 +7,10 @@
     <h3>Password</h3>
     <p>{{ password }}</p>
 </div>
+<div>
+    <h3>DEBUG</h3>
+    <p>Username: {{ request.user }}</p>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
 
 {% endblock %}

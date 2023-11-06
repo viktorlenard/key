@@ -5,10 +5,22 @@
 <h1>Project Key</h1>
 <div name="reg_div">
     <h3>Register</h3>
-    <input name="username" autofocus placeholder="Username">
-    <input name="email" autofocus placeholder="Email">
-    <input name="password" type="password" autofocus placeholder="Password" required>
-    <input name="password_verify" type="password" autofocus placeholder="Verify" required>
-    <input name="register" type="submit" value="Register" required></submit>
+    <form method="POST" action="">
+        <!--csrf_token is for data encryption. https://docs.djangoproject.com/en/4.2/ref/csrf/ -->
+        {% csrf_token %}
+        {{ reg_form.username }}
+        {{ reg_form.email }}
+        {{ reg_form.password1 }}
+        {{ reg_form.password2 }}
+        <input type="submit" name="create_user">
+        {{ reg_form.errors }}
+    </form>
+    <script>
+        var form_fields = document.getElementsByTagName('input')
+        form_fields[1].placeholder = 'Username';
+        form_fields[2].placeholder = 'Email';
+        form_fields[3].placeholder = 'Password';
+        form_fields[4].placeholder = 'Verify';
+    </script>
 </div>
 {% endblock %}

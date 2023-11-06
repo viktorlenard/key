@@ -5,9 +5,15 @@
 <h1>Project Key</h1>
 <div name="login_div">
     <h3>Login</h3>
-    <input name="username" autofocus placeholder="Username">
-    <input name="password" type="password" autofocus placeholder="Password" required>
-    <input name="login" type="submit" value="Login" required></submit>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <input name="username" autofocus placeholder="Username">
+        <input name="password" type="password" autofocus placeholder="Password" required>
+        <input name="login" type="submit" value="Login" required></submit>
+    </form>
+    {% for message in messages %}
+        <p id="messages">{{ message }}</p>
+    {% endfor %}
 </div>
 <a href="http://127.0.0.1:8000/password/register" name="Register">Register</a>
 <a href="http://127.0.0.1:8000/password/login" name="password_reset">Forgot password</a>
