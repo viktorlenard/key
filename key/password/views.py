@@ -14,7 +14,7 @@ def index(request):
     request_validator(password_request)
     password = password_generator(password_request)
     password_form = PasswordForm()
-    initial_data = {'password': password}
+    initial_data = {'password': password, 'human': True, 'length': 3, 'div': '-', 'caps': False, 'nums': True}
     password_form = PasswordForm(initial=initial_data)
 
     return render(request, "password/index.html", {

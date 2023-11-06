@@ -2,17 +2,45 @@
 
 {% block body %}
 
-<h1>Passwords</h1>
+<h1>½Passwords</h1>
 <div name="index_div">
-    <form method="POST" action="", id="password_generator">
+    <form method="POST" action="", id="add_password">
         {% csrf_token %}
+        <h3>Add Password</h3>
+        Name
+        <input name="name" autofocus placeholder="Name">
+        URL
+        <input type="url" name="url" placeholder="URL">
         Password
         {{ password_form.password }}
-        Numbers
-        {{ password_form.numbers }}
-        Caps
-        {{ password_form.caps }}
+        Tags
+        <select name="label" id="label" multiple>
+            <option value="blue">Blue</option>
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+            <option value="yellow">Yellow</option>
+            <option value="purple">Purple</option>
+          </select>
         <input name="submit_password" type="submit" value="Add Password" required></submit>
+    </form>
+    <form method="POST" action="", id="password_generator">
+        {% csrf_token %}
+        <h3>Generate Password</h3>
+        Human
+        <input type="checkbox" id="human">
+        Length
+
+        Divider
+        <select name="label" id="label" multiple>
+            <option value="-">-</option>
+            <option value="_">_</option>
+            <option value=".">.</option>
+          </select>
+        Numbers
+        <input type="checkbox" id="nums">
+        Capitalised
+        <input type="checkbox" id="nums">
+        <input name="generate_password" type="submit" value="Generate" required></submit>
     </form>
     <h3>Password</h3>
     <p>{{ password }}</p>
