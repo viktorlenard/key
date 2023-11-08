@@ -12,7 +12,11 @@
         URL
         <input type="url" name="url" placeholder="URL">
         Password
-        {{ password_form.password }}
+        {% if password_form.password != "" %} 
+            {{ password_form.password }}
+        {% else %}
+            <input type="text" name="password" placeholder="Password">
+        {% endif %}
         Tags
         <select name="label" id="label" multiple>
             <option value="blue">Blue</option>

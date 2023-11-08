@@ -30,7 +30,7 @@ from the user in the form of inputs on the website. For testing.
 
 password_request = {
     'human': True,
-    'length': 3,
+    'length': 4,
     'div': '-',
     'caps': True,
     'nums': True,
