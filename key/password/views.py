@@ -1,26 +1,57 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .utils import request_validator, password_generator, password_request
+from .utils import request_validator, password_generator
 from django.forms import inlineformset_factory
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import *
-from .forms import CreateUserForm, PasswordForm
+from .forms import CreateUserForm, AddPasswordForm, GeneratePasswordForm
+import logging
 
-@login_required(login_url='login') # User must be logged in. If not, redirect them to 'login'.
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
+@login_required(login_url='login')
 def index(request):
-    request_validator(password_request)
-    password = password_generator(password_request)
-    password_form = PasswordForm()
-    initial_data = {'password': password, 'human': True, 'length': 3, 'div': '-', 'caps': False, 'nums': True}
-    password_form = PasswordForm(initial=initial_data)
+    generated_password = request.session.get('generated_password', None)
+    add_password_form = AddPasswordForm(request.POST or None, initial={'password': generated_password})
+    generate_password_form = GeneratePasswordForm(request.POST or None)
+
+    if request.method == 'POST':
+        if 'generate_password' in request.POST:
+            if generate_password_form.is_valid():
+                password_request = {
+                    'human': generate_password_form.cleaned_data['human'],
+                    'length': generate_password_form.cleaned_data['length'],
+                    'div': generate_password_form.cleaned_data['div'],
+                    'caps': generate_password_form.cleaned_data['caps'],
+                    'nums': generate_password_form.cleaned_data['nums'],
+                    'valid': None
+                }
+                logger.info('Password request: %s', password_request)
+                request_validator(password_request)
+                generated_password = password_generator(password_request)
+                request.session['generated_password'] = generated_password
+            else:
+                logger.error('GeneratePasswordForm errors: %s', generate_password_form.errors)
+                logger.info('GeneratePasswordForm POST data: %s', request.POST)
+
+        elif 'submit_password' in request.POST:
+            if add_password_form.is_valid():
+            # Save to the database or perform other actions as needed
+                pass
+            else:
+                logger.error('AddPasswordForm errors: %s', add_password_form.errors)
+                logger.info('AddPasswordForm POST data: %s', request.POST)
 
     return render(request, "password/index.html", {
-        "password": password,
-        "password_form": password_form
+        "generated_password": generated_password,
+        "add_password_form": add_password_form,
+        "generate_password_form": generate_password_form,
     })
+
 
 def login_page(request):  
     if request.user.is_authenticated: # If out user is logged in, redicet them to 'password'.

@@ -18,8 +18,8 @@ and their lenght as the value. English words only. Currently
 limited to lenghts between 5-7 
 '''
 
-# f = open('/Users/viktorlenard/Desktop/Repos/key/key/password/static/password/words.json')
-f = open('/Users/viktor.lenard/Desktop/key/key/password/static/password/words.json')
+f = open('/Users/viktorlenard/Desktop/Repos/key/key/password/static/password/words.json')
+# f = open('/Users/viktor.lenard/Desktop/key/key/password/static/password/words.json')
 data = json.load(f)
 
 '''
