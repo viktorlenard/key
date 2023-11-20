@@ -4,7 +4,7 @@ from .utils import request_validator, password_generator
 from django.forms import inlineformset_factory
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Password
 from .forms import CreateUserForm, AddPasswordForm, GeneratePasswordForm
@@ -43,7 +43,6 @@ def index(request):
 
         elif 'submit_password' in request.POST:
             if add_password_form.is_valid():
-            # Save to the database or perform other actions as needed
                 name = add_password_form.cleaned_data['name']
                 url = add_password_form.cleaned_data['url']
                 ciphertext = add_password_form.cleaned_data['password']
@@ -51,6 +50,7 @@ def index(request):
                 comment = add_password_form.cleaned_data['comment']
                 entry = Password(user=request.user, name=name, url=url, ciphertext=ciphertext, tags=tags, comment=comment)
                 entry.save()
+                generated_password = None
             else:
                 logger.error('AddPasswordForm errors: %s', add_password_form.errors)
                 logger.info('AddPasswordForm POST data: %s', request.POST)

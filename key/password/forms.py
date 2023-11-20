@@ -27,7 +27,7 @@ class AddPasswordForm(forms.Form):
         ('green', 'Green'),
         ('yellow', 'Yellow'),
         ('purple', 'Purple'),
-    ])
+    ], required=False)
     comment = forms.CharField(max_length=1000, required=False)
 
     def __init__(self, *args, **kwargs):
