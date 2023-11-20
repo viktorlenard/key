@@ -2,27 +2,13 @@ from django.db import models
 from django.conf import settings
 from django_cryptography.fields import encrypt
 
-# Create your models here.
 
-'''
-Examples for a moron (me):
-
-class Airport(models.Model):
-    code = models.CharField(max_length=3)
-    city = models.CharField(max_length=64)
-
-    def __str__(self):
-        return f"{self.city} ({self.code})"
-
-class Flight(models.Model):
-    origin = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="departures")
-    destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="arrivals")
-    duration = models.IntegerField()
-
-    def __str__(self):
-        return f"{self.id}: {self.origin} to {self.destination}"
-'''
-
+"""
+Using django-cryptography I am encrypting the username, password and comment fields.
+I do anticipate users saving sensitive information as comments. If someone were to
+read the db this is all they get at the moment: 
+1|Apple|apple.com|blue|1|�|�|�
+"""
 class Password(models.Model):
     blue = "blue"
     red = "red"
@@ -38,9 +24,10 @@ class Password(models.Model):
     ]
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE, related_name='user_passwords')
     name = models.CharField(max_length=64)
-    ciphertext = encrypt(models.CharField(max_length=1000))
+    username = encrypt(models.CharField(max_length=1000, null=True, blank=True)) # Encrypted field.
+    ciphertext = encrypt(models.CharField(max_length=1000)) # Encrypted field.
     url = models.CharField(max_length=64)
     tags = models.CharField(max_length=10, choices=pw_tags, null=True, blank=True)
-    comment = models.CharField(max_length=1000, null=True, blank=True)
+    comment = encrypt(models.CharField(max_length=1000, null=True, blank=True)) # Encrypted field.
     def __str__(self):
         return f"{self.user} ({self.name})"

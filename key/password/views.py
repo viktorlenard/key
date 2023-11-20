@@ -45,10 +45,11 @@ def index(request):
             if add_password_form.is_valid():
                 name = add_password_form.cleaned_data['name']
                 url = add_password_form.cleaned_data['url']
+                username = add_password_form.cleaned_data['username']
                 ciphertext = add_password_form.cleaned_data['password']
                 tags = add_password_form.cleaned_data['tags']
                 comment = add_password_form.cleaned_data['comment']
-                entry = Password(user=request.user, name=name, url=url, ciphertext=ciphertext, tags=tags, comment=comment)
+                entry = Password(user=request.user, name=name, url=url, username=username, ciphertext=ciphertext, tags=tags, comment=comment)
                 entry.save()
                 generated_password = None
             else:

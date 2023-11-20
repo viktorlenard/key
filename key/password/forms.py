@@ -20,6 +20,7 @@ class CreateUserForm(UserCreationForm):
 class AddPasswordForm(forms.Form):
     name = forms.CharField(max_length=64)
     url = forms.CharField(max_length=64)
+    username = forms.CharField(max_length=1000)
     password = forms.CharField(max_length=1000)
     tags = forms.ChoiceField(choices=[
         ('blue', 'Blue'),
