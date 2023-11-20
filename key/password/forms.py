@@ -17,17 +17,19 @@ class CreateUserForm(UserCreationForm):
             'password2'
         ]
 
-# Designed to handle adding passwords to the db.
 class AddPasswordForm(forms.Form):
-    password = forms.CharField(max_length=100)
-    human = forms.BooleanField(initial=True)
-    length = forms.IntegerField(validators=[
-        MinValueValidator(3, message='Value must be at least 3.'),
-        MaxValueValidator(8, message='Value must be at most 8.')
+    name = forms.CharField(max_length=64)
+    url = forms.CharField(max_length=64)
+    password = forms.CharField(max_length=1000)
+    tags = forms.ChoiceField(choices=[
+        ('blue', 'Blue'),
+        ('red', 'Red'),
+        ('green', 'Green'),
+        ('yellow', 'Yellow'),
+        ('purple', 'Purple'),
     ])
-    div = forms.CharField(max_length=1)
-    caps = forms.BooleanField(initial=False)
-    nums = forms.BooleanField(initial=True)
+    comment = forms.CharField(max_length=1000, required=False)
+
     def __init__(self, *args, **kwargs):
         initial = kwargs.get('initial', {})
         if 'password' in initial:
