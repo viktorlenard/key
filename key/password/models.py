@@ -37,9 +37,9 @@ class Password(models.Model):
     ]
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE, related_name='user_passwords')
     name = models.CharField(max_length=64)
-    hash = models.CharField(max_length=1000)
+    ciphertext = models.CharField(max_length=1000)
     url = models.CharField(max_length=64)
     tags = models.CharField(max_length=10, choices=pw_tags)
-
+    comment = models.CharField(max_length=1000, null=True, blank=True)
     def __str__(self):
         return f"{self.user} ({self.name})"

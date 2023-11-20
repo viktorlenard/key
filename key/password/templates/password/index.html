@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<h1>½Passwords</h1>
+<h1>½Password</h1>
 <div name="index_div">
 
     <!-- FORM TO ADD PASSWORD TO DB 
@@ -12,9 +12,9 @@
         {% csrf_token %}
         <h3>Add Password</h3>
         Name
-        <input name="name" autofocus placeholder="Name">
+        <input type="text" name="name" autofocus placeholder="Name">
         URL
-        <input type="url" name="url" placeholder="URL">
+        <input type="text" type="url" name="url" placeholder="URL">
         Password
     {% if generated_password %}
         <input type="text" name="password" value="{{ generated_password }}" placeholder="Generated Password">
@@ -63,8 +63,7 @@
 </div>
 <div>
     <h3>DEBUG</h3>
-    <p>Username: {{ request.user }}</p>
-    <a href="{% url 'logout' %}">Logout</a>
+    <a name="logout_button" href="{% url 'logout' %}">logout as {{ request.user }}</a>
 </div>
 
 {% endblock %}

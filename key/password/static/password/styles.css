@@ -1,69 +1,66 @@
 /* Custom fonts */
 
 @font-face {
-    font-family: 'Pangia_Bold';
-    src: url(fonts/PPPangaia-Bold.woff2) format('woff');
+    font-family: 'Mondwest_Bold';
+    src: url(fonts/PPMondwest-Bold.woff2) format('woff');
     font-weight: bold;
 }
 @font-face {
-    font-family: 'Pangia_Light';
-    src: url(fonts/PPPangaia-Light.woff) format('woff');
-    font-weight: light;
+    font-family: 'Mondwest_Regular';
+    src: url(fonts/PPMondwest-Regular.woff2) format('woff');
+    font-weight: normal;
 }
 @font-face {
-    font-family: 'Monument_Reg';
-    src: url(fonts/PPMonumentExtended-Regular.woff) format('woff');
+    font-family: 'Montreal_Reg';
+    src: url(fonts/PPNeueMontrealMono-Regular.woff2) format('woff');
     font-weight: 400;
     font-style: normal;
 }
 @font-face {
-    font-family: 'Monument_Reg_Italic';
-    src: url(fonts/PPMonumentExtended-RegularItalic.woff) format('woff');
+    font-family: 'Montreal_Reg_Italic';
+    src: url(fonts/PPNeueMontrealMono-RegularItalic.woff) format('woff');
     font-weight: 400;
     font-style: italic;
 }
 @font-face {
-    font-family: 'Monument_Black';
-    src: url(fonts/PPMonumentExtended-Black.woff) format('woff');
-    font-weight: bolder;
+    font-family: 'Montreal_Bold';
+    src: url(fonts/PPNeueMontrealMono-Bold.woff2) format('woff');
+    font-weight: bold;
     font-style: normal;
 }
 @font-face {
-    font-family: 'Monument_Black_Italic';
-    src: url(fonts/PPMonumentExtended-BlackItalic.woff) format('woff');
-    font-weight: bolder;
-    font-style: italic;
-}
-@font-face {
-    font-family: 'Monument_Bold';
-    src: url(fonts/PPMonumentExtended-Bold.woff) format('woff');
-    font-weight: 400;
-    font-style: bold;
-}
-@font-face {
-    font-family: 'Monument_Bold_Italic';
-    src: url(fonts/PPMonumentExtended-BoldItalic.woff) format('woff');
-    font-weight: 400;
-    font-style: italic;
+    font-family: 'Montreal_Medium';
+    src: url(fonts/PPNeueMontrealMono-Medium.woff2) format('woff');
+    font-weight: medium;
+    font-style: normal;
 }
 
 /* --------------------------------------------- */
 
 h1 {
-    font-family: 'Pangia_Bold', serif;
+    font-family: 'Mondwest_Bold', serif;
     font-size: 46px;
     text-align: center;
 }
 
 h3 {
-    font-family: 'Monument_Bold', sans-serif;
+    font-family: 'Mondwest_Bold', sans-serif;
     font-size: 25px;
 }
 
 footer {
-    font-family: 'Monument_Bold_Italic', sans-serif;
+    font-family: 'Mondwest_Regular', sans-serif;
     text-align: center;
     padding: 0px;
     background-color: lightslategray;
+    color: black;
+  }
+
+  input[type=text] {
+    font: 'Montreal_Bold', sans-serif;
+  }
+
+  .logout_button {
+    font: 'Montreal_Bold', serif;
     color: black;
   }
