@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 @login_required(login_url='login')
 def index(request):
+    user_passwords = Password.objects.filter(user=request.user)
     generated_password = request.session.get('generated_password', None)
     if 'submit_password' in request.POST:
         add_password_form = AddPasswordForm(request.POST, initial={'password': generated_password})
@@ -57,14 +58,23 @@ def index(request):
                 logger.info('AddPasswordForm POST data: %s', request.POST)
 
     return render(request, "password/index.html", {
+        "user_passwords": user_passwords,
         "generated_password": generated_password,
         "add_password_form": add_password_form,
         "generate_password_form": generate_password_form,
     })
 
+# This view is handling 'get_password' requests from the index.html template.
+@login_required(login_url='login')
+def get_password(request, password_id):
+    password = Password.objects.get(id=password_id)
+    if password.user == request.user:
+        return HttpResponse(password.ciphertext)
+    else:
+        return HttpResponse(status=403)
 
 def login_page(request):  
-    if request.user.is_authenticated: # If out user is logged in, redicet them to 'password'.
+    if request.user.is_authenticated: # If out user is logged in, redirect them to index.
         return redirect('password')
     else:
         if request.method == 'POST': 

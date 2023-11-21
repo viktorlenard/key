@@ -8,6 +8,9 @@ Using django-cryptography I am encrypting the username, password and comment fie
 I do anticipate users saving sensitive information as comments. If someone were to
 read the db this is all they get at the moment: 
 1|Apple|apple.com|blue|1|�|�|�
+
+Unfortunately as an Admin I will still have access to the information saved, need to
+make it clear to the users.
 """
 class Password(models.Model):
     blue = "blue"

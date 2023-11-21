@@ -3,6 +3,56 @@
 {% block body %}
 
 <h1>½Password</h1>
+<div name="user_entries">
+    <h3>Your passwords</h3>
+    {% for password in user_passwords %}
+        <p id="entry_item">Name</p>
+        <li>{{ password.name }}</li>
+        <p id="entry_item">URL</p>
+        <li>{{ password.url }}</li>
+        <p id="entry_item">Username</p>
+        <li>{{ password.username }}</li>
+        <p id="entry_item">Password</p>
+        <li>
+            <button class="password-button" data-id="{{ password.id }}">Show Password</button>
+            <span class="password-text"></span>
+        </li>        
+        <p id="entry_item">Tag</p>
+        <li>{{ password.tags }}</li>
+        <p id="entry_item">Comment</p>
+        <li>{{ password.comment }}</li>
+        <div>
+            --------------------
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Script to handle the toggling of the passwords on the page. 
+    When the button is clicked, it fetches the password based on the id
+    and changes the button label to 'Hide Password'
+    When clicked again it should hide the password and change the label
+    back to 'Show Password'.-->
+
+<script>
+    document.querySelectorAll('.password-button').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var passwordId = this.dataset.id;
+            var passwordText = this.nextElementSibling;
+            if (passwordText.textContent) {
+                passwordText.textContent = '';
+                this.textContent = 'Show Password';
+            } else {
+                fetch('/password/get_password/' + passwordId)
+                    .then(response => response.text())
+                    .then(password => {
+                        passwordText.textContent = password;
+                        this.textContent = 'Hide Password';
+                    });
+            }
+        });
+    });
+</script>
+
 <div name="index_div">
 
     <!-- FORM TO ADD PASSWORD TO DB 

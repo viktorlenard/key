@@ -61,6 +61,10 @@ footer {
   }
 
   .logout_button {
-    font: 'Montreal_Bold', serif;
+    font-family: 'Montreal_Bold', serif;
+    color: black;
+  }
+  .entry_item {
+    font-family: 'Montreal_Bold', serif;
     color: black;
   }
