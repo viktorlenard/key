@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 @login_required(login_url='login')
 def index(request):
-    user_passwords = Password.objects.filter(user=request.user)
+    user_passwords = Password.objects.filter(user=request.user).order_by('name')
     generated_password = request.session.get('generated_password', None)
     if 'submit_password' in request.POST:
         add_password_form = AddPasswordForm(request.POST, initial={'password': generated_password})
@@ -64,7 +64,12 @@ def index(request):
         "generate_password_form": generate_password_form,
     })
 
-# This view is handling 'get_password' requests from the index.html template.
+'''This view is handling 'get_password' requests from the index.html template.
+The get_password function takes in a request object and a password_id as an argument.
+It fetches the password object from the database using its password_id. If the current user
+matches the user that created the password, the password is returned as a string. 
+If not, a 403 error is returned.'''
+
 @login_required(login_url='login')
 def get_password(request, password_id):
     password = Password.objects.get(id=password_id)
