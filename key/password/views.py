@@ -78,6 +78,15 @@ def get_password(request, password_id):
     else:
         return HttpResponse(status=403)
 
+@login_required(login_url='login')
+def delete_password(request, password_id):
+    password = Password.objects.get(id=password_id)
+    if password.user == request.user:
+        password.delete()
+        return redirect('password')
+    else:
+        return HttpResponse(status=403)
+
 def login_page(request):  
     if request.user.is_authenticated: # If out user is logged in, redirect them to index.
         return redirect('password')

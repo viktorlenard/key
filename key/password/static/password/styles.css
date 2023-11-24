@@ -68,3 +68,8 @@ footer {
     font-family: 'Montreal_Bold', serif;
     color: black;
   }
+
+  .entry_card {
+    position: relative;
+    display: none;
+}

@@ -19,6 +19,25 @@
     a good idea in terms of security.-->
 
 <script>
+    // This script handles toggling the entry cards on the page.
+    document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('#entry_main_container').addEventListener('click', function(event) {
+        var button = event.target.closest('.entry_main');
+        if (button) {
+            var passwordId = button.dataset.id;
+            var card = document.querySelector('.entry_card[data-id="' + passwordId + '"]');
+            if (card) {
+                var display = window.getComputedStyle(card).display;
+                if (display === 'none') {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+                }
+            }
+        });
+    });
+    // This script handles the toggling of the passwords within the entry cards.
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.password-button').forEach(function(button) {
             button.addEventListener('click', function() {
@@ -36,6 +55,33 @@
                         });
                 }
             });
+        });
+    });
+    // This script handles the deletion of passwords on the page.
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('#entry_main_container').addEventListener('click', function(event) {
+            var button = event.target.closest('.delete_entry');
+            if (button) {
+                event.stopPropagation(); // Stop event propagation
+                var passwordId = button.dataset.id;
+                fetch('/password/delete_password/' + passwordId)
+                    .then(response => {
+                        if (response.ok) {
+                            // Select the entry card using the passwordId and remove it
+                            var entryCard = document.querySelector('.entry_card[data-id="' + passwordId + '"]');
+                            if (entryCard) {
+                                entryCard.remove();
+                            }
+                            // Also remove the corresponding entry_main button
+                            var entryMainButton = document.querySelector('.entry_main[data-id="' + passwordId + '"]');
+                            if (entryMainButton) {
+                                entryMainButton.remove();
+                            }
+                        } else {
+                            console.error('Failed to delete password');
+                        }
+                    });
+            }
         });
     });
 </script>
@@ -98,26 +144,32 @@
 
     <div name="user_entries">
         <h3>Your passwords</h3>
-        {% for password in user_passwords %}
-            <p id="entry_item">Name</p>
-            <li>{{ password.name }}</li>
-            <p id="entry_item">URL</p>
-            <li>{{ password.url }}</li>
-            <p id="entry_item">Username</p>
-            <li>{{ password.username }}</li>
-            <p id="entry_item">Password</p>
-            <li>
-                <button class="password-button" data-id="{{ password.id }}">Show Password</button>
-                <span class="password-text"></span>
-            </li>        
-            <p id="entry_item">Tag</p>
-            <li>{{ password.tags }}</li>
-            <p id="entry_item">Comment</p>
-            <li>{{ password.comment }}</li>
-            <div>
-                --------------------
-            </div>
-        {% endfor %}
+        <div id="entry_main_container">
+            {% for password in user_passwords %}
+                <button class="entry_main" data-id="{{ password.id }}">{{ password.name }}</button>
+                <div class="entry_card" data-id="{{ password.id }}" style="display: none;">
+                    <p id="entry_item">Name</p>
+                    <li>{{ password.name }}</li>
+                    <p id="entry_item">URL</p>
+                    <li>{{ password.url }}</li>
+                    <p id="entry_item">Username</p>
+                    <li>{{ password.username }}</li>
+                    <p id="entry_item">Password</p>
+                    <li>
+                        <button class="password-button" data-id="{{ password.id }}">Show Password</button>
+                        <span class="password-text"></span>
+                    </li>        
+                    <p id="entry_item">Tag</p>
+                    <li>{{ password.tags }}</li>
+                    <p id="entry_item">Comment</p>
+                    <li>{{ password.comment }}</li>
+                    <button class="delete_entry" data-id="{{ password.id }}">Delete</button>
+                    <div>
+                        --------------------
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     
     <h3>Password</h3>
