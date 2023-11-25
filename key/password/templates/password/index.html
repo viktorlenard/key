@@ -1,6 +1,9 @@
 {% extends "password/layout.html" %}
 
 {% block body %}
+<div id="header">
+    <a name="logout_button" href="{% url 'logout' %}">logout as {{ request.user }}</a>
+</div>
 
 <h1>½Password</h1>
 
@@ -79,8 +82,8 @@
                             }
                         } else {
                             console.error('Failed to delete password');
-                        }
-                    });
+                    }
+                });
             }
         });
     });
@@ -125,15 +128,15 @@
     <form method="POST" action="", id="generate_password_form">
         {% csrf_token %}
         <h3>Generate Password</h3>
-        Human
+        Readable
         <input type="checkbox" name="human" id="human">
         Length
-        <input type="length" id="length" name="length" min="3" max="8" />
+        <input type="range" id="length" name="length" min="3" max="8" />
         Divider
-        <select name="div" id="div" multiple>
-            <option value="-">-</option>
-            <option value="_">_</option>
-            <option value=".">.</option>
+        <select name="div" id="div">
+            <option value="_" selected>underscore</option>
+            <option value="-">hyphen</option>
+            <option value=".">period</option>
           </select>
         Numbers
         <input type="checkbox" name="nums" id="nums">
@@ -173,12 +176,8 @@
     </div>
     
     <h3>Password</h3>
-    <p>{{ password }}</p>
+    <p>Generated password: {{ password }}</p>
     <p>{{ generated_password }}</p>
-</div>
-<div>
-    <h3>DEBUG</h3>
-    <a name="logout_button" href="{% url 'logout' %}">logout as {{ request.user }}</a>
 </div>
 
 {% endblock %}

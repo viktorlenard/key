@@ -3,19 +3,18 @@
 {% block body %}
 
 <h1>½Password</h1>
-<div name="login_div">
+<div id="login_div">
     <h3>Login</h3>
-    <form method="POST" action="">
+    <form id="login_form" method="POST" action="">
         {% csrf_token %}
         <input name="username" autofocus placeholder="Username">
         <input name="password" type="password" autofocus placeholder="Password" required>
         <input name="login" type="submit" value="Login" required></submit>
     </form>
+    <a href="http://127.0.0.1:8000/password/register" name="Register">Register</a>
     {% for message in messages %}
         <p id="messages">{{ message }}</p>
     {% endfor %}
 </div>
-<a href="http://127.0.0.1:8000/password/register" name="Register">Register</a>
-<a href="http://127.0.0.1:8000/password/login" name="password_reset">Forgot password</a>
 
 {% endblock %}

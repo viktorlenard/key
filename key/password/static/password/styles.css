@@ -37,6 +37,34 @@
 
 /* --------------------------------------------- */
 
+body {
+    background-color: rgba(32, 32, 32, 1);
+    color: white;
+    margin: 0px;
+    padding: 0px;
+}
+
+label {
+    font-family: 'Montreal_Reg', sans-serif;
+}
+
+a {
+    font-family: 'Montreal_Reg', sans-serif;
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: gray;
+}
+
+input, textarea, select {
+    font-family: 'Montreal_Reg', sans-serif;
+    background-color: rgba(72, 72, 72, 1);
+    color: rgb(185, 185, 185);
+}
+
 h1 {
     font-family: 'Mondwest_Bold', serif;
     font-size: 46px;
@@ -51,6 +79,7 @@ h3 {
 footer {
     font-family: 'Mondwest_Regular', sans-serif;
     text-align: center;
+    width: 100%;
     padding: 0px;
     background-color: lightslategray;
     color: black;
@@ -72,4 +101,50 @@ footer {
   .entry_card {
     position: relative;
     display: none;
+}
+
+#header {
+    position: fixed;
+    padding-top: 5px;
+    margin-right: 15px;
+    top: 0;
+    z-index: -1;
+    text-align: right;
+    width: 99%;
+}
+
+.entry_main {
+    font-family: 'Montreal_Bold', serif;
+    background-color: rgba(72, 72, 72, 1);
+    color: rgb(185, 185, 185);
+    font-size: 16px;
+    padding: 10px 20px;
+    width: 150px;
+    height: 50px;
+    transition: color 0.2s ease;
+}
+
+.entry_main:hover {
+    color: rgba(32, 32, 32, 1);
+    background-color: rgb(162, 157, 157);
+}
+
+#login_div, #reg_div {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    text-align: center;
+    min-height: 300px;
+    padding: 50px;
+}
+
+#login_form, #reg_form {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    text-align: center;
+}
+
+#login_form input, #reg_form input {
+    margin: 2px;
 }

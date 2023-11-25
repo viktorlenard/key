@@ -2,10 +2,10 @@
 
 {% block body %}
 
-<h1>Project Key</h1>
+<h1>½Password</h1>
 <div name="reg_div">
     <h3>Register</h3>
-    <form method="POST" action="">
+    <form id="reg_form" method="POST" action="">
         <!--csrf_token is for data encryption. https://docs.djangoproject.com/en/4.2/ref/csrf/ -->
         {% csrf_token %}
         {{ reg_form.username }}
@@ -15,6 +15,7 @@
         <input type="submit" name="create_user">
         {{ reg_form.errors }}
     </form>
+    <a href="http://127.0.0.1:8000/password/" name="Login">Login</a>
     <script>
         var form_fields = document.getElementsByTagName('input')
         form_fields[1].placeholder = 'Username';
