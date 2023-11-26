@@ -83,24 +83,46 @@ footer {
     padding: 0px;
     background-color: lightslategray;
     color: black;
-  }
+}
 
-  input[type=text] {
+input[type=text] {
     font: 'Montreal_Bold', sans-serif;
-  }
+}
 
-  .logout_button {
+#index_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+#user_entries, #add_password_div, #generate_password_div, #entry_main_container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    max-width: 33%;
+    overflow: auto;
+    word-wrap: break-word;
+}
+
+.comment_text li {
+    word-break: break-word;
+}
+
+#index_div > div form * {
+    display: block;
+}
+
+.logout_button {
     font-family: 'Montreal_Bold', serif;
     color: black;
-  }
-  .entry_item {
-    font-family: 'Montreal_Bold', serif;
-    color: black;
-  }
+}
 
-  .entry_card {
-    position: relative;
-    display: none;
+.entry_card {
+    width: 100%;
+    overflow: auto;
+    word-break: break-all;
 }
 
 #header {
@@ -119,9 +141,10 @@ footer {
     color: rgb(185, 185, 185);
     font-size: 16px;
     padding: 10px 20px;
-    width: 150px;
+    width: 100%;
     height: 50px;
     transition: color 0.2s ease;
+    text-align: left;
 }
 
 .entry_main:hover {
@@ -147,4 +170,15 @@ footer {
 
 #login_form input, #reg_form input {
     margin: 2px;
+}
+
+.entry_item {
+    font-family: 'Mondwest_Bold', serif;
+    font-size: 20px;
+    color: rgb(162, 157, 157);
+}
+
+li {
+    list-style-type: none;
+    font-family: 'Montreal_Bold', sans-serif;
 }

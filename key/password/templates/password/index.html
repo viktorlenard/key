@@ -89,61 +89,9 @@
     });
 </script>
 
-<div name="index_div">
+<!-- ------------------------------------------------------------------------------------------------------------ -->
 
-    <!-- FORM TO ADD PASSWORD TO DB 
-         THIS IS FOR DEBUGGING -->
-
-    <form method="POST" action="", id="add_password_form">
-        {% csrf_token %}
-        <h3>Add Password</h3>
-        Name
-        <input type="text" name="name" autofocus placeholder="Name">
-        URL
-        <input type="text" type="url" name="url" placeholder="URL">
-        Username
-        <input type="text" name="username" placeholder="Username">
-        Password
-    {% if generated_password %}
-        <input type="text" name="password" value="{{ generated_password }}" placeholder="Generated Password">
-    {% else %}
-        <input type="text" name="password" placeholder="Password">
-    {% endif %}
-        Tags
-        <select name="tags" id="tags">
-            <option value="">None</option>
-            <option value="blue">Blue</option>
-            <option value="red">Red</option>
-            <option value="green">Green</option>
-            <option value="yellow">Yellow</option>
-            <option value="purple">Purple</option>
-          </select>
-          <input type="text" name="comment" placeholder="Comment">
-          <input name="submit_password" type="submit" value="Add Password" required>
-    </form>
-
-    <!-- FORM TO GENERATE PASSWORD FOR ADD PASSWORD ABOVE
-         THIS IS FOR DEBUGGING -->
-
-    <form method="POST" action="", id="generate_password_form">
-        {% csrf_token %}
-        <h3>Generate Password</h3>
-        Readable
-        <input type="checkbox" name="human" id="human">
-        Length
-        <input type="range" id="length" name="length" min="3" max="8" />
-        Divider
-        <select name="div" id="div">
-            <option value="_" selected>underscore</option>
-            <option value="-">hyphen</option>
-            <option value=".">period</option>
-          </select>
-        Numbers
-        <input type="checkbox" name="nums" id="nums">
-        Capitalised
-        <input type="checkbox" name="caps" id="caps">
-        <input name="generate_password" type="submit" value="Generate" required>
-    </form>
+<div id="index_div">
 
     <div name="user_entries">
         <h3>Your passwords</h3>
@@ -151,21 +99,23 @@
             {% for password in user_passwords %}
                 <button class="entry_main" data-id="{{ password.id }}">{{ password.name }}</button>
                 <div class="entry_card" data-id="{{ password.id }}" style="display: none;">
-                    <p id="entry_item">Name</p>
+                    <p class="entry_item">Name</p>
                     <li>{{ password.name }}</li>
-                    <p id="entry_item">URL</p>
+                    <p class="entry_item">URL</p>
                     <li>{{ password.url }}</li>
-                    <p id="entry_item">Username</p>
+                    <p class="entry_item">Username</p>
                     <li>{{ password.username }}</li>
-                    <p id="entry_item">Password</p>
+                    <p class="entry_item">Password</p>
                     <li>
                         <button class="password-button" data-id="{{ password.id }}">Show Password</button>
                         <span class="password-text"></span>
                     </li>        
-                    <p id="entry_item">Tag</p>
+                    <p class="entry_item">Tag</p>
                     <li>{{ password.tags }}</li>
-                    <p id="entry_item">Comment</p>
+                    <p class="entry_item">Comment</p>
+                    <div class="comment_text">
                     <li>{{ password.comment }}</li>
+                    </div>
                     <button class="delete_entry" data-id="{{ password.id }}">Delete</button>
                     <div>
                         --------------------
@@ -174,10 +124,65 @@
             {% endfor %}
         </div>
     </div>
-    
-    <h3>Password</h3>
-    <p>Generated password: {{ password }}</p>
-    <p>{{ generated_password }}</p>
+
+    <!-- FORM TO ADD PASSWORD TO DB 
+         THIS IS FOR DEBUGGING -->
+    <div id="add_password_div">
+        <form method="POST" action="", id="add_password_form">
+            {% csrf_token %}
+            <h3>Add Password</h3>
+            Name
+            <input type="text" name="name" autofocus placeholder="Name">
+            URL
+            <input type="text" type="url" name="url" placeholder="URL">
+            Username
+            <input type="text" name="username" placeholder="Username">
+            Password
+        {% if generated_password %}
+            <input type="text" name="password" value="{{ generated_password }}" placeholder="Generated Password">
+        {% else %}
+            <input type="text" name="password" placeholder="Password">
+        {% endif %}
+            Tags
+            <select name="tags" id="tags">
+                <option value="">None</option>
+                <option value="blue">Blue</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="yellow">Yellow</option>
+                <option value="purple">Purple</option>
+            </select>
+            <input type="text" name="comment" placeholder="Comment">
+            <input name="submit_password" type="submit" value="Add Password" required>
+        </form>
+    </div>
+    <!-- FORM TO GENERATE PASSWORD FOR ADD PASSWORD ABOVE
+         THIS IS FOR DEBUGGING -->
+    <div id="generate_password_div">
+        <form method="POST" action="", id="generate_password_form">
+            {% csrf_token %}
+            <h3>Generate Password</h3>
+            Readable
+            <input type="checkbox" name="human" id="human">
+            Length
+            <input type="range" id="length" name="length" min="3" max="8" />
+            Divider
+            <select name="div" id="div">
+                <option value="_" selected>underscore</option>
+                <option value="-">hyphen</option>
+                <option value=".">period</option>
+            </select>
+            Numbers
+            <input type="checkbox" name="nums" id="nums">
+            Capitalised
+            <input type="checkbox" name="caps" id="caps">
+            <input name="generate_password" type="submit" value="Generate" required>
+        </form>
+    </div>  
 </div>
+
+<h3>Password</h3>
+<p>Generated password: {{ password }}</p>
+<p>{{ generated_password }}</p>
 
 {% endblock %}
