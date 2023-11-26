@@ -2,8 +2,8 @@
 
 {% block body %}
 
-<h1>½Password</h1>
-<div name="reg_div">
+<h1><a id="fancy_link"href="{% url 'login' %}">½Password</a></h1>
+<div id="reg_div">
     <h3>Register</h3>
     <form id="reg_form" method="POST" action="">
         <!--csrf_token is for data encryption. https://docs.djangoproject.com/en/4.2/ref/csrf/ -->

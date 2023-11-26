@@ -1,11 +1,13 @@
 {% extends "password/layout.html" %}
 
 {% block body %}
-<div id="header">
-    <a name="logout_button" href="{% url 'logout' %}">logout as {{ request.user }}</a>
+<div id="navbar">
+    <a id="mail_button" href="mailto:viktor.lenard@gmail.com.com">Email</a>
+    <a id="about_button" href="{% url 'about' %}">About</a>
+    <a id="logout_button" href="{% url 'logout' %}">Logout as {{ request.user }}</a>
 </div>
 
-<h1>½Password</h1>
+<h1><a id="fancy_link"href="{% url 'login' %}">½Password</a></h1>
 
 <!--Script to handle the toggling of the passwords on the page. 
     Adds a function to all buttons when the DOM is loaded.
@@ -87,13 +89,29 @@
             }
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Select all elements with the class "tag_color"
+    var elements = document.getElementsByClassName('tag_color');
+
+    // Loop over the elements
+    for (var i = 0; i < elements.length; i++) {
+        // Get the text content of the element
+        var color = elements[i].textContent.trim();
+
+        // Check if the color is one of the valid colors
+        if (['Blue', 'Red', 'Green', 'Yellow', 'Purple'].includes(color)) {
+            // Set the color of the element to the color name
+            elements[i].style.setProperty('color', color.toLowerCase(), 'important');
+            }
+        }
+    });
 </script>
 
 <!-- ------------------------------------------------------------------------------------------------------------ -->
 
 <div id="index_div">
-
-    <div name="user_entries">
+    <div id="user_entries">
         <h3>Your passwords</h3>
         <div id="entry_main_container">
             {% for password in user_passwords %}
@@ -105,32 +123,52 @@
                     <li>{{ password.url }}</li>
                     <p class="entry_item">Username</p>
                     <li>{{ password.username }}</li>
-                    <p class="entry_item">Password</p>
+                    <div class="password_div">
                     <li>
                         <button class="password-button" data-id="{{ password.id }}">Show Password</button>
                         <span class="password-text"></span>
-                    </li>        
+                    </li>
+                    </div>        
                     <p class="entry_item">Tag</p>
-                    <li>{{ password.tags }}</li>
+                    <li class="tag_color">{{ password.tags }}</li>
                     <p class="entry_item">Comment</p>
                     <div class="comment_text">
                     <li>{{ password.comment }}</li>
                     </div>
                     <button class="delete_entry" data-id="{{ password.id }}">Delete</button>
-                    <div>
-                        --------------------
-                    </div>
                 </div>
             {% endfor %}
         </div>
     </div>
 
+    <div id="add_password_div">
+        <h3>Generate Password</h3>
+        <form method="POST" action="", id="generate_password_form">
+            {% csrf_token %}
+            Readable
+            <input type="checkbox" name="human" id="human">
+            Length
+            <input type="range" id="length" name="length" min="3" max="8" />
+            Divider
+            <select name="div" id="div">
+                <option value="_" selected>underscore</option>
+                <option value="-">hyphen</option>
+                <option value=".">period</option>
+            </select>
+            Numbers
+            <input type="checkbox" name="nums" id="nums">
+            Capitalised
+            <input type="checkbox" name="caps" id="caps">
+            <input name="generate_password" type="submit" value="Generate" required>
+        </form>
+    </div>  
+
     <!-- FORM TO ADD PASSWORD TO DB 
          THIS IS FOR DEBUGGING -->
     <div id="add_password_div">
+        <h3>Add Password</h3>
         <form method="POST" action="", id="add_password_form">
             {% csrf_token %}
-            <h3>Add Password</h3>
             Name
             <input type="text" name="name" autofocus placeholder="Name">
             URL
@@ -156,33 +194,5 @@
             <input name="submit_password" type="submit" value="Add Password" required>
         </form>
     </div>
-    <!-- FORM TO GENERATE PASSWORD FOR ADD PASSWORD ABOVE
-         THIS IS FOR DEBUGGING -->
-    <div id="generate_password_div">
-        <form method="POST" action="", id="generate_password_form">
-            {% csrf_token %}
-            <h3>Generate Password</h3>
-            Readable
-            <input type="checkbox" name="human" id="human">
-            Length
-            <input type="range" id="length" name="length" min="3" max="8" />
-            Divider
-            <select name="div" id="div">
-                <option value="_" selected>underscore</option>
-                <option value="-">hyphen</option>
-                <option value=".">period</option>
-            </select>
-            Numbers
-            <input type="checkbox" name="nums" id="nums">
-            Capitalised
-            <input type="checkbox" name="caps" id="caps">
-            <input name="generate_password" type="submit" value="Generate" required>
-        </form>
-    </div>  
 </div>
-
-<h3>Password</h3>
-<p>Generated password: {{ password }}</p>
-<p>{{ generated_password }}</p>
-
 {% endblock %}

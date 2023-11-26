@@ -38,6 +38,7 @@
 /* --------------------------------------------- */
 
 body {
+    min-height: 100vh;
     background-color: rgba(32, 32, 32, 1);
     color: white;
     margin: 0px;
@@ -65,7 +66,7 @@ input, textarea, select {
     color: rgb(185, 185, 185);
 }
 
-h1 {
+h1, #fancy_link {
     font-family: 'Mondwest_Bold', serif;
     font-size: 46px;
     text-align: center;
@@ -73,10 +74,16 @@ h1 {
 
 h3 {
     font-family: 'Mondwest_Bold', sans-serif;
-    font-size: 25px;
+    font-size: 30px;
+}
+
+p {
+    font-family: 'Montreal_Reg', sans-serif;
+    font-size: 16px;
 }
 
 footer {
+    margin-top: auto;
     font-family: 'Mondwest_Regular', sans-serif;
     text-align: center;
     width: 100%;
@@ -94,10 +101,13 @@ input[type=text] {
     flex-direction: row;
     justify-content: space-between;
     padding: 50px;
+    max-width: 1000px;
+    margin: auto;
 }
 
-#user_entries, #add_password_div, #generate_password_div, #entry_main_container{
+#add_password_div, #generate_password_div {
     flex: 1;
+    margin: 10px;
     display: flex;
     flex-direction: column;
     min-width: 300px;
@@ -106,8 +116,14 @@ input[type=text] {
     word-wrap: break-word;
 }
 
+#user_entries {
+    width: 100%;
+    min-width: 500px;
+}
+
 .comment_text li {
     word-break: break-word;
+
 }
 
 #index_div > div form * {
@@ -125,14 +141,32 @@ input[type=text] {
     word-break: break-all;
 }
 
-#header {
+.password_div {
+    display: flex;
+    flex-direction: column;
+}
+
+#navbar {
     position: fixed;
-    padding-top: 5px;
-    margin-right: 15px;
     top: 0;
-    z-index: -1;
-    text-align: right;
-    width: 99%;
+    right: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+#navbar a, #navbar p {
+    margin-left: 20px;
+}
+
+#mail_button, #about_button, #logout_button {
+    font-family: 'Montreal_Bold', serif;
+    color: rgb(98, 98, 98);
+}
+
+#mail_button:hover, #about_button:hover, #logout_button:hover {
+    color: white;
 }
 
 .entry_main {
@@ -140,7 +174,7 @@ input[type=text] {
     background-color: rgba(72, 72, 72, 1);
     color: rgb(185, 185, 185);
     font-size: 16px;
-    padding: 10px 20px;
+    margin-bottom: 5px;
     width: 100%;
     height: 50px;
     transition: color 0.2s ease;
@@ -152,13 +186,39 @@ input[type=text] {
     background-color: rgb(162, 157, 157);
 }
 
+.delete_entry, .password-button {
+    font-family: 'Montreal_Bold', serif;
+    background-color: rgb(190, 0, 0);
+    color: rgb(185, 185, 185);
+    font-size: 16px;
+    margin-bottom: 5px;
+    width: 150px;
+    height: 50px;
+    transition: color 0.2s ease;
+    text-align: left;
+}
+
+.delete_entry:hover, .password-button:hover {
+    color: rgb(197, 197, 197);
+    background-color: rgb(220, 0, 0);
+}
+
+.password-button {
+    margin-top: 10px;
+    background-color: rgb(60, 152, 95);
+    color: rgba(32, 32, 32, 1);
+}
+
+.password-button:hover {
+    background-color: rgb(80, 199, 126);
+    color: rgba(32, 32, 32, 1);
+}
+
 #login_div, #reg_div {
     display: flex;
     flex-direction: column;
-    width: 200px;
-    text-align: center;
-    min-height: 300px;
-    padding: 50px;
+    justify-content: center;
+    align-items: center;
 }
 
 #login_form, #reg_form {
@@ -178,7 +238,35 @@ input[type=text] {
     color: rgb(162, 157, 157);
 }
 
+.entry_card {
+    background-color: rgb(45, 45, 45);
+    padding: 5px;
+}
+
 li {
     list-style-type: none;
     font-family: 'Montreal_Bold', sans-serif;
+}
+
+.comment_text, .password-text {
+    height: auto;
+    min-height: 100px;
+}
+
+#about_div {
+    display: flex;
+    margin-top: 100px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#Mondwest {
+    font-family: 'Mondwest_Bold', serif;
+    font-size: 22px;
+}
+
+#Neue_Montreal_Mono {
+    font-family: 'Montreal_Bold', sans-serif;
+    font-size: 17px;
 }

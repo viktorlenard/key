@@ -1,8 +1,12 @@
 {% extends "password/layout.html" %}
 
 {% block body %}
+<div id="navbar">
+    <a id="mail_button" href="mailto:viktor.lenard@gmail.com.com">Email</a>
+    <a id="about_button" href="{% url 'about' %}">About</a>
+</div>
 
-<h1>½Password</h1>
+<h1><a id="fancy_link"href="{% url 'login' %}">½Password</a></h1>
 <div id="login_div">
     <h3>Login</h3>
     <form id="login_form" method="POST" action="">

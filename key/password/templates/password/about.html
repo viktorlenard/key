@@ -1,7 +1,18 @@
 {% extends "password/layout.html" %}
 
 {% block body %}
+<div id="navbar">
+    <a id="mail_button" href="mailto:viktor.lenard@gmail.com.com">Email</a>
+    <a id="about_button" href="{% url 'login' %}">Login</a>
+    <a id="logout_button" href="{% url 'register' %}">Register</a>
+</div>
+<h1>This is <a id="fancy_link"href="{% url 'login' %}">½Password</a>.</h1>
 
-<h1>This shall be the register page.</h1>
+<div id="about_div">
+    <p>Created by Viktor Lenard for CS50, using Django. Find the source code <a href="https://github.com/viktorlenard/key">here</a>.</p>
+    <p>Fonts in use:</p>
+    <a id="Mondwest" href="https://pangrampangram.com/products/bitmap-fonts">Mondwest</a>
+    <a id="Neue_Montreal_Mono" href="https://pangrampangram.com/products/neue-montreal-mono">Neue Montreal Mono</a>
+</div>
 
 {% endblock %}
