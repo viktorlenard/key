@@ -1,6 +1,7 @@
 import random
 import json
 import string
+import os
 
 '''
 File for all backend functions. List of functions at the top,
@@ -14,14 +15,14 @@ more detailed explanation with the respective code below.
 
 ''' 
 Database containing a dict, with strings as the keys,
-and their lenght as the value. English words only. Currently
-limited to lenghts between 5-7 
+and their length as the value. English words only. Currently
+limited to lengths between 5-7 
 '''
 
-f = open('/Users/viktorlenard/Desktop/Repos/key/key/password/static/password/words.json')
-# f = open('/Users/viktor.lenard/Desktop/key/key/password/static/password/words.json')
-data = json.load(f)
-
+dir_path = os.path.dirname(os.path.realpath(__file__))
+json_path = os.path.join(dir_path, 'static', 'password', 'words.json')
+with open(json_path) as f:
+    data = json.load(f)
 '''
 Password request in the form of a dict. Would be coming 
 from the user in the form of inputs on the website. For testing.
