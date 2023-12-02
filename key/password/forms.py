@@ -4,7 +4,6 @@ from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.forms import ModelForm
 from .models import *
-from .utils import password_generator, request_validator
 
 # Custom class, inheriting from the built in UserCreationForm. Created for customisation.
 class CreateUserForm(UserCreationForm):

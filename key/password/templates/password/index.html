@@ -89,23 +89,6 @@
             }
         });
     });
-
-    document.addEventListener('DOMContentLoaded', function() {
-    // Select all elements with the class "tag_color"
-    var elements = document.getElementsByClassName('tag_color');
-
-    // Loop over the elements
-    for (var i = 0; i < elements.length; i++) {
-        // Get the text content of the element
-        var color = elements[i].textContent.trim();
-
-        // Check if the color is one of the valid colors
-        if (['Blue', 'Red', 'Green', 'Yellow', 'Purple'].includes(color)) {
-            // Set the color of the element to the color name
-            elements[i].style.setProperty('color', color.toLowerCase(), 'important');
-            }
-        }
-    });
 </script>
 
 <!-- ------------------------------------------------------------------------------------------------------------ -->
